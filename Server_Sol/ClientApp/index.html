@@ -8,38 +8,41 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/w3.min.css'
         integrity='sha512-Z6UIAdEZ7JNzeX5M/c5QZj+oqbldGD+E8xJEoOwAx5e0phH7kdjsWULGeK5l2UjehKtChHDaUY2rQAF/NEiI9w=='
         crossorigin='anonymous' />
-    <link href="assets/rpgui.min.css" rel="stylesheet" type="text/css" >
     <title>F# Mentorship</title>
 </head>
 
 <body class="rpgui-content rpgui-cursor-default">
 
-    <div class="inner rpgui-container framed">
-        <h1 class="">F# Mentorapp</h1>
-        <hr class="golden">
-        <button class="rpgui-button">Hit GET</button>
-        <button class="rpgui-button">Hit POST</button>
-        <button onclick="fsApp.get()">Test</button>
-    </div>
+    <h1 class="">F# Mentorapp</h1>
+    <hr class="golden">
+    <button onclick="getAll()">GET All</button>
+    <button onclick="getById()">GET by Id</button>
+    <button>Test</button>
 
-
-    <script src="assets/rpgui.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
-    
-    <script type="module" src="js/api.js"></script>
-    <script type="module">
-        import * as api from './js/api.js';
+    <script>
+        var apiUrl = 'https://localhost:5001/api/composite/';
         
-        (() => exposeModules())()
-
-        function exposeModules() {
-            const fsApp = {
-                // functions
-                get: api.get
-            }
-            
-            window.fsApp = fsApp;
+        function getAll() {
+            $.ajax({
+                url: `${apiUrl}all`,
+                success: (response) => {
+                    console.log(response);
+                },
+                error: (error) => console.log(error)
+            });
         }
+
+        function getById() {
+            $.ajax({
+                url: `${apiUrl}byid/3`,
+                success: (response) => {
+                    console.log(response);
+                },
+                error: (error) => console.log(error)
+            });
+        }
+        
     </script>
 </body>
 

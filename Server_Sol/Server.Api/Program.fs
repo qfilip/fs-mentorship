@@ -1,14 +1,15 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open Giraffe
+open System.IO
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.Hosting
-open System.IO
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
+open Giraffe
+open ApiServices
 
 let webApp =
     choose [
@@ -16,7 +17,14 @@ let webApp =
             choose [
                 route "/" >=> text "Hi"
                 route "/hello" >=> text "Hi"
+                choose (ApiEndpoints.Composite.gets)
             ]
+            
+            
+        POST >=>
+            choose ApiEndpoints.Composite.posts
+
+            
         setStatusCode 404 >=> text "Not Found" ]
 
 let errorHandler (ex : Exception) (logger : ILogger) =
@@ -26,7 +34,7 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 
 let configureCors (builder : CorsPolicyBuilder) =
     builder
-       .WithOrigins("http://localhost:5500")
+       .AllowAnyOrigin() //("http://localhost:5500")
        .AllowAnyMethod()
        .AllowAnyHeader()
        |> ignore
@@ -48,6 +56,7 @@ let configureApp (app : IApplicationBuilder) =
 let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
+    services.AddScoped<DataAccess>() |> ignore
 
 
 let configureLogging (builder : ILoggingBuilder) =
@@ -63,8 +72,8 @@ let main args =
         .ConfigureWebHostDefaults(
             fun webHostBuilder ->
                 webHostBuilder
-                    // .UseContentRoot(contentRoot)
-                    // .UseWebRoot(webRoot)
+                    .UseContentRoot(contentRoot)
+                    .UseWebRoot(webRoot)
                     .Configure(Action<IApplicationBuilder> configureApp)
                     .ConfigureServices(configureServices)
                     .ConfigureLogging(configureLogging)
