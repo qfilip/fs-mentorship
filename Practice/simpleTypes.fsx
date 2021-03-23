@@ -12,6 +12,16 @@ module SimpleTypes
         else
             Ok (ctor value)
     
+
+    module String5 =
+        type String5 = private String5 of string
+        
+        let create x =
+            let validator x = String.length x |> (fun x -> x = 0)
+            createString "String5" x String5 validator
+
+        let getValue (String5 x) = x
+
     
     module String25 =
         type String25 = private String25 of string

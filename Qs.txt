@@ -1,0 +1,5 @@
+Should Result type be modeled same as Option type???
+
+if whateverValid then OK (val) else Error "Crap"
+VS
+if whateverValid then OK (val) else failwith "Crap"

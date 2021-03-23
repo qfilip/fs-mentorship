@@ -15,8 +15,13 @@
 
     <h1 class="">F# Mentorapp</h1>
     <hr class="golden">
-    <button onclick="getAll()">GET All</button>
-    <button onclick="getById()">GET by Id</button>
+    <div>
+        <button onclick="getAll()">GET All</button>
+    </div>
+    <div>
+        <label >Id</label> <input id="dataId" type="text" />
+        <button onclick="getById()">GET by Id</button>
+    </div>
     <button>Test</button>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
@@ -25,6 +30,7 @@
         
         function getAll() {
             $.ajax({
+                method: 'GET',
                 url: `${apiUrl}all`,
                 success: (response) => {
                     console.log(response);
@@ -34,8 +40,12 @@
         }
 
         function getById() {
+            const id = document.getElementById('dataId').value;
+            const data = { id: id };
             $.ajax({
-                url: `${apiUrl}byid/3`,
+                url: `${apiUrl}byid/${id}`,
+                data: data,
+                method: 'POST',
                 success: (response) => {
                     console.log(response);
                 },
