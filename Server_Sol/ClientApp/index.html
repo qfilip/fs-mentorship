@@ -15,42 +15,68 @@
 
     <h1 class="">F# Mentorapp</h1>
     <hr class="golden">
-    <div>
-        <button onclick="getAll()">GET All</button>
-    </div>
-    <div>
-        <label >Id</label> <input id="dataId" type="text" />
-        <button onclick="getById()">GET by Id</button>
-    </div>
-    <button>Test</button>
+        
+    <button onclick="ping()">Ping Server</button>
+    <button onclick="getAll()">GET All</button>
+    <button onclick="getById()">GET by Id</button>
+    <button onclick="postTest()">POST TEST</button>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
     <script>
-        var apiUrl = 'https://localhost:5001/api/composite/';
+        var data = [];
+        var apiUrl = 'https://localhost:5001/api/cocktail/';
         
+        function ping() {
+            $.ajax({
+                method: 'GET',
+                url: `https://localhost:5001`,
+                success: (response) => {
+                    console.table(response);
+                },
+                error: (error) => console.log(error)
+            })
+        }
+
         function getAll() {
             $.ajax({
                 method: 'GET',
                 url: `${apiUrl}all`,
                 success: (response) => {
-                    console.log(response);
+                    console.table(response);
+                    data = response;
                 },
                 error: (error) => console.log(error)
             });
         }
 
         function getById() {
-            const id = document.getElementById('dataId').value;
-            const data = { id: id };
+            const id = data[0].id;
+            const dto = { id: id };
+
             $.ajax({
                 url: `${apiUrl}byid/${id}`,
-                data: data,
-                method: 'POST',
+                data: dto,
+                method: 'GET',
                 success: (response) => {
-                    console.log(response);
+                    console.table(response);
                 },
                 error: (error) => console.log(error)
             });
+        }
+
+        function postTest() {
+            const item = data[0];
+            $.ajax({
+                url: `${apiUrl}post-test`,
+                method: 'POST',
+                data: item,
+                success: (r) => {
+                    console.log(r);
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            })
         }
         
     </script>

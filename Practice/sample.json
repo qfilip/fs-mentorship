@@ -1,5 +1,9 @@
 {
     "Name": "Bob",
     "Age": 27,
-    "Role": "Admin"
+    "Role": "Admin",
+    "Code": [
+        "String5",
+        "IDDQD"
+    ]
 }

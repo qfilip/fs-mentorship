@@ -1,11 +1,11 @@
 module ApiServices
 
 open System
-open System.Collections.Concurrent
 open DomainModels
+open DomainModels.Entities
 
 type DataAccess() =
-    let mutable data = [
+    let mutable data: TestData list = [
         { Id = Guid.NewGuid(); Name = "Alice" }
         { Id = Guid.NewGuid(); Name = "Bob" }
         { Id = Guid.NewGuid(); Name = "Carl" }
@@ -28,3 +28,7 @@ type DataAccess() =
 
 
     member _.GetAll () = data
+
+    member _.PostTest x =
+        printfn "%O" x.Id
+        "Doned"

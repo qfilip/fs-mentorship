@@ -5,8 +5,9 @@ open Microsoft.AspNetCore.Http
 open FSharp.Control.Tasks.V2.ContextInsensitive
 open ApiServices
 open System
+open DomainModels.Entities
 
-module Composite =
+module Cocktail =
     let service (ctx : HttpContext) = ctx.GetService<DataAccess>()
     
      
@@ -25,6 +26,16 @@ module Composite =
             task {
                 let db = service ctx
                 let result = db.Get(id)
+                
+                return! json result next ctx
+            }
+
+
+    let postTest (x: TestData) =
+        fun (next : HttpFunc) (ctx : HttpContext) ->
+            task {
+                let db = service ctx
+                let result = db.PostTest(x)
                 
                 return! json result next ctx
             }

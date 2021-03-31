@@ -4,7 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="SimpleTypes.fs" />
     <Compile Include="Models.fs" />
+    <Compile Include="Dtos.fs" />
+    <Compile Include="ManualMapper.fs" />
     <Compile Include="Services.fs" />
     <Compile Include="ControllerHandlers.fs" />
     <Compile Include="Controllers.fs" />

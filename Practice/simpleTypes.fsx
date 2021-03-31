@@ -4,11 +4,9 @@ module SimpleTypes
 
     let createString fieldName value ctor lengthValidator = 
         if isNull value then
-            let msg = sprintf "%s must not be null or empty" fieldName
-            failwith msg
+            Error (sprintf "%s must not be null or empty" fieldName)
         elif not (lengthValidator value) then
-            let msg = sprintf "%s has incorrect length" fieldName
-            failwith msg
+            Error (sprintf "%s has incorrect length" fieldName)
         else
             Ok (ctor value)
     
@@ -17,7 +15,7 @@ module SimpleTypes
         type String5 = private String5 of string
         
         let create x =
-            let validator x = String.length x |> (fun x -> x = 0)
+            let validator x = String.length x |> (fun x -> x > 0)
             createString "String5" x String5 validator
 
         let getValue (String5 x) = x
@@ -41,3 +39,6 @@ module SimpleTypes
             createString "String50" str String100 validator
 
         let getValue (String100 str100) = str100
+
+
+

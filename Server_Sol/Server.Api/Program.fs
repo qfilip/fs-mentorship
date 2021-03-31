@@ -17,12 +17,12 @@ let webApp =
             choose [
                 route "/" >=> text "Hi"
                 route "/hello" >=> text "Hi"
-                choose (ApiEndpoints.Composite.gets)
+
+                subRoute "/api" (choose ApiEndpoints.Cocktail.gets)
             ]
             
             
-        POST >=>
-            choose ApiEndpoints.Composite.posts
+        // POST >=> ApiEndpoints.Cocktail.posts
 
             
         setStatusCode 404 >=> text "Not Found" ]
@@ -56,7 +56,7 @@ let configureApp (app : IApplicationBuilder) =
 let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
-    services.AddScoped<DataAccess>() |> ignore
+    services.AddSingleton<DataAccess>() |> ignore
 
 
 let configureLogging (builder : ILoggingBuilder) =
