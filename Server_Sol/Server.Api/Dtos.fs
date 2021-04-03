@@ -1,61 +1,44 @@
 module Dtos
+
 open System
 open DomainModels.Common
 open SimpleTypes.Strength
 
 
-module Audit = 
-    [<CLIMutable>]
-    type AuditDto = {
-        Id: string
-        EntityId: string
-        CreatedOn: DateTime
-        EntityStatus: EntityStatus
-    }
+[<CLIMutable>]
+type AuditDto = {
+    Id: Guid
+    EntityId: string
+    CreatedOn: DateTime
+    EntityStatus: eEntityStatus
+}
 
 
-
-module Excerpt =
-    [<CLIMutable>]
-    type ExcerptDto = {
-        Id: Guid
-        Name: string
-        Amount: int
-    }
-
+[<CLIMutable>]
+type ExcerptDto = {
+    Id: Guid
+    CocktailId: Guid
+    IngredientId: Guid
+    Amount: int
+}
 
 
-open Excerpt
+[<CLIMutable>]
+type IngredientDto = {
+    Id: Guid
+    Name: string
+    Strength: Strength
+    EntityStatus: eEntityStatus
 
-module Ingredient =
-    [<CLIMutable>]
-    type IngredientDto = {
-        Id: Guid
-        Name: string
-        Strength: Strength
+    Excerpts: ExcerptDto list option
+} 
 
-        Excerpts: ExcerptDto list option
-    } 
-    and CocktailDto = {
-       Id: Guid
-       AuditId: Guid
 
-       Name: string
-       Description: string option
+and CocktailDto = {
+    Id: Guid
+    Name: string
+    Description: string option
+    EntityStatus: eEntityStatus
        
-       Excerpts: ExcerptDto list option
-    }
-
-
-
-module Cocktail =
-    [<CLIMutable>]
-    type CocktailDto = {
-        Id: Guid
-        AuditId: Guid
-
-        Name: string
-        Description: string option
-        
-        Excerpts: ExcerptDto list option
-    }
+    Excerpts: ExcerptDto list option
+}

@@ -4,7 +4,7 @@ open System
 open SimpleTypes.Strength
 
 module Common =
-    type EntityStatus = 
+    type eEntityStatus = 
         | Active = 0
         | Deleted = 99
 
@@ -17,7 +17,7 @@ module Entities =
         Id: string
         EntityId: string
         CreatedOn: DateTime
-        EntityStatus: EntityStatus
+        EntityStatus: eEntityStatus
     }
 
 
@@ -34,8 +34,8 @@ module Entities =
     type Ingredient = {
         Id: string
         Name: string
-        Strength: Strength
-        EntityStatus: EntityStatus
+        Strength: int
+        EntityStatus: eEntityStatus
 
         Excerpts: Excerpt list
     }
@@ -46,10 +46,12 @@ module Entities =
         Id: string
         Name: string
         Description: string option
-        EntityStatus: EntityStatus
+        EntityStatus: eEntityStatus
 
         Excerpts: Excerpt list 
     }
+
+
 
     [<CLIMutable>]
     type TestData = {
