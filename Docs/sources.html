@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship Sources</title>
+</head>
+<body>
+    
+    <div id="container">
+        <!-- <h2></h2>
+        <ul>
+            <li>
+                <a href=""></a>
+            </li>
+        </ul> -->
+    </div>
+
+
+    <script>
+        var sources;
+        (() => {
+            initiate();
+            
+            addTool('Canopy testing tool', 'http://lefthandedgoat.github.io/canopy/');
+            addReference('Async samples', 'https://fsharpforfunandprofit.com/posts/concurrency-async-and-parallel/');
+
+            render(sources);
+        })()
+
+        function addTool(title, href) {
+            const link = { href: href, title: title };
+            addLink('tools', link);
+        }
+
+        function addReference(title, href) {
+            const link = { href: href, title: title };
+            addLink('references', link);
+        }
+
+        function addLink(objHeader, link) {
+            const i = sources.findIndex(x => x.header.toLowerCase() === objHeader.toLowerCase());
+            sources[i].links.push(link);
+        }
+
+        function initiate() {
+            sources = [
+                { header: 'Tools', links: [] },
+                { header: 'References', links: [] }
+            ];
+        }
+
+        function render() {
+            let div = document.getElementById('container');
+            let innerHtml = '';
+            sources.forEach(s => {
+                let listItems = '';
+                s.links.forEach(l => listItems += `<li><a href="${l.href}">${l.title}</a></li>`);
+                innerHtml += `<h2>${s.header}</h2><ul>${listItems}</ul>`;
+            });
+
+            div.innerHTML = innerHtml;
+        }
+    </script>
+</body>
+</html>
