@@ -19,6 +19,7 @@
     <button onclick="ping()">Ping Server</button>
     <button onclick="getAll()">GET All</button>
     <button onclick="getById()">GET by Id</button>
+    <button onclick="postTestData()">POST test data</button>
     <button onclick="postTest()">POST TEST</button>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
@@ -27,56 +28,69 @@
         var apiUrl = 'https://localhost:5001/api/cocktail/';
         
         function ping() {
-            $.ajax({
-                method: 'GET',
-                url: `https://localhost:5001`,
-                success: (response) => {
-                    console.table(response);
-                },
-                error: (error) => console.log(error)
-            })
+            const url = 'https://localhost:5001';
+            get(url);
         }
 
         function getAll() {
-            $.ajax({
-                method: 'GET',
-                url: `${apiUrl}all`,
-                success: (response) => {
-                    console.table(response);
-                    data = response;
-                },
-                error: (error) => console.log(error)
-            });
+            const url = `${apiUrl}all`;
+            const successFn = (x) => {
+                console.table(x);
+                data = x;
+            }
+            get(url, null, successFn);
         }
 
         function getById() {
             const id = data[0].id;
             const dto = { id: id };
+            const url = `${apiUrl}byid/${id}`;
 
-            $.ajax({
-                url: `${apiUrl}byid/${id}`,
-                data: dto,
-                method: 'GET',
-                success: (response) => {
-                    console.table(response);
-                },
-                error: (error) => console.log(error)
-            });
+            get(url, dto);
+        }
+
+        function postTestData() {
+            const dto = { id: '24e706c5-e252-4015-9f04-fbfbbb8ea371', name: 'Kwanza' };
+            const url = `${apiUrl}post-test`;
+            post(url, dto);
         }
 
         function postTest() {
-            const item = data[0];
-            $.ajax({
-                url: `${apiUrl}post-test`,
-                method: 'POST',
-                data: item,
-                success: (r) => {
-                    console.log(r);
-                },
-                error: (error) => {
-                    console.log(error);
-                }
-            })
+            const dto = data[0];
+            const url = `${apiUrl}post-test`;
+            
+            post(url, dto);
+        }
+
+
+        function get(url, data, successFn) {
+            const method = 'GET';
+            ajaxCall(url, method, data, successFn);
+        }
+
+        function post(url, data, successFn) {
+            const method = 'POST';
+            ajaxCall(url, method, data, successFn);
+        }
+
+        function ajaxCall(url, method, data, successFn) {
+            const onSuccess = (result) => {
+                if(!!successFn) successFn(result)
+                else console.table(result)
+            }
+
+            let ajaxObj = {
+                url: url,
+                method: method,
+                success: (r) => onSuccess(r),
+                error: (e) => console.log(e)
+            }
+
+            if(!!data) {
+                ajaxObj['data'] = data;
+            }
+
+            $.ajax(ajaxObj);
         }
         
     </script>
