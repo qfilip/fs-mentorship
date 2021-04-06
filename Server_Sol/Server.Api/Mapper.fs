@@ -71,10 +71,10 @@ module Dtos =
         let dto: IngredientDto = {
             Id = x.Id |> toGuid
             Name = x.Name
-            Strength = SimpleTypes.Strength.wrap (x.Strength)
-            EntityStatus: eEntityStatus
+            Strength = SimpleTypes.Strength.wrapUnchecked (x.Strength)
+            EntityStatus = x.EntityStatus
 
-            Excerpts: ExcerptDto list option
+            Excerpts = x.Excerpts |> (toListOption toExcerptDto)
         }
         dto
 
@@ -86,6 +86,6 @@ module Dtos =
             Description = x.Description
             EntityStatus = x.EntityStatus
             
-            Excerpts = x.Excerpts |> toListOption toExcerptDto
+            Excerpts = x.Excerpts |> (toListOption toExcerptDto)
         }
         dto

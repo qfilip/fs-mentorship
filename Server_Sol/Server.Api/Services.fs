@@ -29,6 +29,4 @@ type DataAccess() =
 
     member _.GetAll () = data
 
-    member _.PostTest x =
-        printfn "%O" x.Id
-        "Doned"
+    member _.PostTest x = sprintf "Posted test data [Id: %O; Name: %s]" x.Id x.Name

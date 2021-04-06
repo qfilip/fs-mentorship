@@ -22,7 +22,10 @@ let webApp =
             ]
             
             
-        // POST >=> ApiEndpoints.Cocktail.posts
+        POST >=> 
+            choose [
+                subRoute "/api" (choose ApiEndpoints.Cocktail.posts)
+            ]
 
             
         setStatusCode 404 >=> text "Not Found" ]
@@ -46,7 +49,7 @@ let configureApp (app : IApplicationBuilder) =
     | true  ->
         app.UseDeveloperExceptionPage()
     | false ->
-        app .UseGiraffeErrorHandler(errorHandler)
+        app.UseGiraffeErrorHandler(errorHandler)
             .UseHttpsRedirection())
         .UseCors(configureCors)
         .UseStaticFiles()

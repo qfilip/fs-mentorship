@@ -33,3 +33,5 @@ module Strength =
     let wrap x = wrap typeName x Strength validator
     
     let unwrap (Strength x) = x
+
+    let wrapUnchecked x = Strength x

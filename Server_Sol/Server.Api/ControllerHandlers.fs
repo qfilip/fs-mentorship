@@ -31,6 +31,15 @@ module Cocktail =
             }
 
 
+    let postCocktail (x: Cocktail) =
+        fun (next : HttpFunc) (ctx : HttpContext) ->
+            task {
+                let db = service ctx
+                
+                return! json x next ctx
+            }
+
+
     let postTest (x: TestData) =
         fun (next : HttpFunc) (ctx : HttpContext) ->
             task {
