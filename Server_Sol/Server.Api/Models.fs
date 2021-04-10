@@ -45,10 +45,9 @@ module Entities =
     type Cocktail = {
         Id: string
         Name: string
-        Description: string option
         EntityStatus: eEntityStatus
 
-        Excerpts: Excerpt list 
+        Excerpts: Excerpt list
     }
 
 

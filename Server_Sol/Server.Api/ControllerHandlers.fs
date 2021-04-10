@@ -1,6 +1,7 @@
 module Handlers
 
 open Giraffe
+open Thoth.Json
 open Microsoft.AspNetCore.Http
 open FSharp.Control.Tasks.V2.ContextInsensitive
 open ApiServices

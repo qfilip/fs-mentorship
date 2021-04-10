@@ -37,7 +37,6 @@ type IngredientDto = {
 and CocktailDto = {
     Id: Guid
     Name: string
-    Description: string option
     EntityStatus: eEntityStatus
        
     Excerpts: ExcerptDto list option

@@ -8,12 +8,16 @@
     <Compile Include="Models.fs" />
     <Compile Include="Dtos.fs" />
     <Compile Include="Mapper.fs" />
+    <Compile Include="Database.fs" />
     <Compile Include="Services.fs" />
     <Compile Include="ControllerHandlers.fs" />
     <Compile Include="Controllers.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="Giraffe" Version="4.1.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="Thoth.Json.Giraffe" Version="4.3.0" />
   </ItemGroup>
 </Project>

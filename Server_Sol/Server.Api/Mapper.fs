@@ -47,7 +47,6 @@ module Entities =
         let entity: Cocktail = {
             Id = x.Id.ToString()
             Name = x.Name
-            Description = x.Description
             EntityStatus = x.EntityStatus
 
             Excerpts = x.Excerpts |> toListFromOptionList toExcerpt
@@ -83,7 +82,6 @@ module Dtos =
         let (dto: CocktailDto) = {
             Id = x.Id |> toGuid
             Name = x.Name
-            Description = x.Description
             EntityStatus = x.EntityStatus
             
             Excerpts = x.Excerpts |> (toListOption toExcerptDto)

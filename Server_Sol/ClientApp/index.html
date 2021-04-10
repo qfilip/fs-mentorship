@@ -52,7 +52,7 @@
         function postTestData() {
             const dto = { id: '24e706c5-e252-4015-9f04-fbfbbb8ea371', name: 'Kwanza' };
             const url = `${apiUrl}post-test`;
-            post(url, dto);
+            post(url, json);
         }
 
         function postTest() {
@@ -87,7 +87,9 @@
             }
 
             if(!!data) {
-                ajaxObj['data'] = data;
+                const json = JSON.stringify(data);
+                console.log(data);
+                ajaxObj['data'] = json;
             }
 
             $.ajax(ajaxObj);
