@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Simple", "Simple\Simple.fsproj", "{0EB9ED4A-2333-4B1E-861E-1340C66000BB}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvenSimpler", "EvenSimpler\EvenSimpler.fsproj", "{D8CB1C19-62B3-48B5-91EC-6687E504B78A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8CB1C19-62B3-48B5-91EC-6687E504B78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8CB1C19-62B3-48B5-91EC-6687E504B78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8CB1C19-62B3-48B5-91EC-6687E504B78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8CB1C19-62B3-48B5-91EC-6687E504B78A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BF9653F-3463-4EA2-945E-2CF2B8FD43A0}
+	EndGlobalSection
+EndGlobal

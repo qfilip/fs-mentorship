@@ -1,0 +1,79 @@
+{
+    "Cocktails": [
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Moscow Mule",
+            "EntityStatus": 0
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Dark 'n' Stormy",
+            "EntityStatus": 0
+        }
+    ],
+    "Ingredients": [
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Vodka",
+            "Strength": 40,
+            "EntityStatus": 0
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Rum",
+            "Strength": 40,
+            "EntityStatus": 0
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Mint",
+            "Strength": 0,
+            "EntityStatus": 0
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Name": "Ginger Beer",
+            "Strength": 2,
+            "EntityStatus": 0
+        }
+    ],
+    "Excerpts": [
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 5
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 3
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 3
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 5
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 3
+        },
+        {
+            "Id": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "CocktailId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "IngredientId": "a8139ff8-0e80-4096-b98e-a97e0fa8d243",
+            "Amount": 3
+        }
+    ],
+    "Audits": []
+}

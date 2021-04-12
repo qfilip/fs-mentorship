@@ -1,9 +1,15 @@
 {
     "Name": "Bob",
-    "Age": 27,
+    "Age": [
+        "Age",
+        27
+    ],
     "Role": "Admin",
     "Code": [
-        "String5",
-        "IDDQD"
+        "Hash",
+        [
+            "String5",
+            "IDDQD"
+        ]
     ]
 }
