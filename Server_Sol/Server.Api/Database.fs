@@ -18,8 +18,10 @@ let connString = "Data Source=\"D:\\Riznice\\fs-mentorship\\Server_Sol\\Server.A
 
 let mapRowsToRecords (reader: IDataReader): CocktailEntity list =
     // Get the indexes of each column
-    let id = (reader.GetOrdinal "Id").ToString()
-    let name = (reader.GetOrdinal "Name").ToString()
+    let readData propName = (reader.GetOrdinal propName).ToString()
+
+    let id = readData (nameof Unchecked.defaultof<CocktailEntity>.Id)
+    let name = readData (nameof Unchecked.defaultof<CocktailEntity>.Name)
     let entityStatus = reader.GetOrdinal "EntityStatus"
 
     [ while reader.Read() do

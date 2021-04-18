@@ -10,7 +10,7 @@ let private getNullError typeName =
 
 let wrap typeName value ctor validatorFn = 
     match (validatorFn value) with
-    | Error err -> getValueError typeName err
+    | Error err -> (getValueError typeName err)
     | Ok v -> Ok (ctor v)
 
 
@@ -33,3 +33,16 @@ module YrsOfExp =
     let unwrap (YrsOfExp x) = x
     
     let wrapUnchecked x = YrsOfExp x
+
+
+module String5 =
+    type String5 = private String5 of string
+    let private typename = nameof(String5)
+
+    let private validator (x: string) =
+        if x.Length = 5 then Ok x
+        else Error "Invalid length"
+
+    let wrap x = wrap typename x validator
+
+    let unwrap (String5 x) = x
