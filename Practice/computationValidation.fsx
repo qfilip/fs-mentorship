@@ -16,7 +16,7 @@ type PasswordValidator() =
     member _.Return(x) = Ok x
 
 
-let pvalidator = PasswordValidator()
+let passwaldor = PasswordValidator()
 
 let vpass = "MyStupidP@ssword1"
 let ipass = "passwd"
@@ -32,22 +32,10 @@ let hasUppercase (x: string) = toResult x (Regex.IsMatch(x, "[A-Z]")) "No upperc
 // How to list all errors (applicative)
 
 let validator x = 
-    pvalidator {
+    passwaldor {
         let! hd = hasDigits x
         and! hs = hasSymbol x
         return hd
     }
 
-// let rec validate password validatorFns validity errors =
-//     match validatorFns with
-//     | [] ->
-//         match errors with
-//         | [] -> Ok password
-//         | _ -> Error errors
-//     | vFn::vFns ->
-//         let currentState = vFn password
-//         match currentState with
-//         | Error err ->
-//             let currentErrors = errors @ err
-//             validate password vFns currentState currentErrors
-//         | Ok _ -> validate password vFns 
+
