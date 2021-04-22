@@ -1,4 +1,5 @@
 ﻿module WrappedTypes
+open System
 
 let private defMsg = "Failed to create"
 
@@ -14,10 +15,15 @@ module Sha0 =
     type Sha0 = private Sha0 of string
     let private typeName = nameof(Sha0)
         
-    let private validator (x: string) =
-        if isNull x then Error (getNullError typeName)
-        elif x.Length <> 4 then Error (getValueError typeName "Must be 4 chars long")
-        else Ok (x)
+    let private validator x =
+        let maxValue = int (Math.Pow(2., float (Utils.HashLength)))
+        
+        if x >= 0 && x <= maxValue then
+            let error = sprintf "Must be within range: 0-%i" maxValue
+            Error (getValueError typeName error)
+        else
+            let sha0 = Sha0 (Utils.makeKey x)
+            Ok (sha0)
         
     let wrap x = validator x
         

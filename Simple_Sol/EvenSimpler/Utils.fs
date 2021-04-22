@@ -2,7 +2,7 @@
 open System
 
 [<Literal>]
-let hashLength = 10
+let HashLength = 10
 
 let charToInt c = int c - int '0'
 
@@ -27,7 +27,7 @@ let combineKeys key1 key2 =
 
 let varifyHash combinedKey hash =
     let validHash = 
-        seq { 1..hashLength }
+        seq { 1..HashLength }
         |> Seq.map(fun x -> "0")
         |> String.concat ""
     
@@ -36,12 +36,12 @@ let varifyHash combinedKey hash =
     hashResult = validHash
 
 
-let toBinary number = 
+let makeKey number = 
     let sequence = List.empty
 
     let rec loop number increment state =
-        match (state |> List.length = hashLength) with
-        | true -> state
+        match (state |> List.length) with
+        | HashLength -> state
         | _ ->
             let bit = int (Math.Floor(decimal (number % 2)))
             let newNumber = number / 2
@@ -49,7 +49,24 @@ let toBinary number =
             let newState = state @ [bit]
             loop newNumber inc newState
 
-    loop number 1 sequence
+    (loop number 1 sequence)
     |> List.rev
     |> Seq.map(fun x -> x.ToString())
     |> String.concat ""
+
+
+let decodeKey (key: string) =
+    let rec computeIntValue bits bitValue currentValue =
+        match bits with
+        | [] -> currentValue
+        | x::xs ->
+            let xchar = x |> charToInt
+            let nextValue = currentValue + (xchar * bitValue)
+            let nextBitValue = bitValue * 2
+            computeIntValue xs nextBitValue nextValue
+            
+    let bits = key |> Seq.toList |> List.rev
+    let bitValue = 1
+    let value = 0
+    
+    (computeIntValue bits bitValue value)

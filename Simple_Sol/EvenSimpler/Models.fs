@@ -11,9 +11,8 @@ module Common =
 open Common
 module Entities =
     type User = {
-        Name: string
-        Email: string
         Key: Sha0
+        Nick: string
         Wallet: Wallet
     }
 
@@ -30,8 +29,8 @@ module Dtos =
     open Entities
 
     type UserDto = {
-        Name: string
-        Key: string
+        Key: int
+        Nick: string
         Wallet: Wallet
     }
 

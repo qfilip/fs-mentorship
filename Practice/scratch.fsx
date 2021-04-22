@@ -1,15 +1,14 @@
 open System
-// 101 5
-// 110 6
-//
-// 001 1
+
 
 let key1 = "0101"
 let key2 = "0110"
 
+let charToInt c = int c - int '0'
+
+
 let combineKeys k1 k2 =
     let andChar (zip: char * char) =
-        let charToInt c = int c - int '0'
         let result = (fst zip |> charToInt) &&& (snd zip |> charToInt)
         result.ToString()
 
@@ -23,6 +22,7 @@ let combineKeys k1 k2 =
     |> String.concat ""
 
 combineKeys key1 key2
+
 
 let toBinary number = 
     let sequence = List.empty
@@ -45,9 +45,16 @@ let toBinary number =
 let x = toBinary 10
 
 
-let generateValidHash =
-    let hashLength = 10
-    seq {1..hashLength}
-    |> Seq.map(fun x -> "0")
-    |> String.concat ""
-
+let decodeKey (key: string) =
+    let rec computeIntValue bits bitValue currentValue =
+        match bits with
+        | [] -> currentValue
+        | x::xs ->
+            let xchar = x |> charToInt
+            let nextValue = currentValue + (xchar * bitValue)
+            let nextBitValue = bitValue * 2
+            computeIntValue xs nextBitValue nextValue
+            
+    let bits = key |> Seq.toList |> List.rev
+    
+    (computeIntValue bits 1 0)

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Simple", "Simple\Simple.fsproj", "{0EB9ED4A-2333-4B1E-861E-1340C66000BB}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvenSimpler", "EvenSimpler\EvenSimpler.fsproj", "{D8CB1C19-62B3-48B5-91EC-6687E504B78A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EvenSimpler", "EvenSimpler\EvenSimpler.fsproj", "{D8CB1C19-62B3-48B5-91EC-6687E504B78A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,7 +14,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EB9ED4A-2333-4B1E-861E-1340C66000BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D8CB1C19-62B3-48B5-91EC-6687E504B78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

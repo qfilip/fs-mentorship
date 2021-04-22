@@ -8,6 +8,5 @@ module Common =
     let private readFromFile = File.ReadAllText filepath
 
 
-
 module Mock =
     let mockit = ()
