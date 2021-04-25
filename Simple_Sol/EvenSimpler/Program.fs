@@ -3,14 +3,13 @@
 open System
 open Models.Common
 open Models.Entities
-open Builders
 open WrappedTypes.Sha0
 
 [<EntryPoint>]
 let main argv =
     let result = ResultBuilder()
 
-    let key = result {
+    let sender = result {
             let! key = WrappedTypes.Sha0.wrap 127
             let user = {
                 Key = key
@@ -19,6 +18,16 @@ let main argv =
             }
             return user
         }
+
+    let reciever = result {
+        let! key = WrappedTypes.Sha0.wrap 127
+        let user = {
+            Key = key
+            Nick = "Nick"
+            Wallet = (Bitcoin, 2.)
+        }
+        return user
+    }
 
     
     0 // return an integer exit code

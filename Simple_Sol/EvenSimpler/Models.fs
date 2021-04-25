@@ -48,12 +48,12 @@ module DomainErrors =
     type InsufficientFunds = string
     type InvalidCoinType = string
     type InvalidKey = string
-
     type TransactionError =
         | InvalidKey
         | InvalidSignature
         | InvalidCoinType
         | InsufficientFunds
+
 
 module FunctionTypes =
     open Dtos
