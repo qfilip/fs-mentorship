@@ -8,20 +8,21 @@ let private defMsg = "Failed to create"
 
 let getValueError typeName error =
     let error = sprintf "%s %s. Reason: %s" defMsg typeName error
-    ValidationCommon.Failiure [error]
+    [error]
 
 
 let private getNullError typeName =
     let error = sprintf "%s %s, the value is null" defMsg typeName
-    ValidationCommon.Failiure [error]
+    [error]
+
+
+let wrapAny x = Success x
 
 
 module Sha0 =
     type Sha0 = private Sha0 of string
 
-
     let private typeName = nameof(Sha0)
-        
 
     let private validator x =
         let maxValue = int (Math.Pow(2., float (Utils.HashLength)))
@@ -29,13 +30,11 @@ module Sha0 =
         | true -> Success (Sha0 (Utils.makeKey x))
         | _ ->
             let reason = sprintf "Must be within range: 0-%i" maxValue
-            (getValueError typeName reason)
+            Failiure (getValueError typeName reason)
         
 
     let wrap x = validator x
         
-
     let unwrap (Sha0 x) = x
-    
 
     let wrapUnchecked x = Sha0 x
