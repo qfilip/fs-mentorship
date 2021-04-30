@@ -30,7 +30,7 @@ module Sha0 =
         | true -> Success (Sha0 (Utils.makeKey x))
         | _ ->
             let reason = sprintf "Must be within range: 0-%i" maxValue
-            Failiure (getValueError typeName reason)
+            Failure (getValueError typeName reason)
         
 
     let wrap x = validator x

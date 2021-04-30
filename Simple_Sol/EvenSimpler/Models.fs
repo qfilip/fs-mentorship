@@ -6,9 +6,38 @@ open WrappedTypes.Sha0
 
 module Common =
     type Coin = Bitcoin | Ethereum | Litecoin
-    type Wallet = Coin * float // is this a primitive type? For dto?
+    
+    type Wallet = {
+        Id: Guid
+        UserKey: Sha0
+        Coin: Coin
+        Amount: float
+    }
 
 open Common
+module Tables = 
+    type UserTbl = {
+        Key: string
+        Nick: string
+    }
+
+    type WalletTbl = {
+        Id: Guid
+        UserKey: string
+        Coin: Coin
+        Amount: float
+    }
+
+    type TransactionTbl = {
+        Id: Guid
+        Sender: string
+        Reciever: string
+        VerificationHash: string
+        Coin: Coin
+        Amount: float
+    }
+
+
 module Entities =
     type User = {
         Key: Sha0

@@ -23,6 +23,10 @@ let bind f xResult =
     | Fail errs -> Fail errs
 
 
+let (<!>) = bind
+let (<*>) = apply
+
+
 let zip x y =
     let toTuple x1 x2 = (x1, x2)
-    Success (toTuple (apply x) (apply y))
+    Success toTuple <!> x <*> y
