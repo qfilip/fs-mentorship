@@ -1,35 +1,35 @@
 {
     "Users": [
         {
-            "Key": "0001111111",
+            "Key": 127,
             "Nick": "Aziz"
         },
         {
-            "Key": "0111000010",
+            "Key": 450,
             "Nick": "Baal"
         },
         {
-            "Key": "0011101010",
+            "Key": 234,
             "Nick": "Vaana"
         }
     ],
     "Transactions": [],
     "Wallets": [
         {
-            "Id": "148f5e36-7e0a-4dac-8b51-8262b093650c",
-            "UserKey": "0001111111",
+            "Id": "4a15a5a5-744a-4b29-bc6a-26193407b755",
+            "UserKey": 127,
             "Coin": "Bitcoin",
             "Amount": 100.0
         },
         {
-            "Id": "148f5e36-7e0a-4dac-8b51-8262b093650c",
-            "UserKey": "0111000010",
+            "Id": "c001e5a6-d519-48df-9ec1-74f896f625ce",
+            "UserKey": 450,
             "Coin": "Bitcoin",
             "Amount": 100.0
         },
         {
-            "Id": "148f5e36-7e0a-4dac-8b51-8262b093650c",
-            "UserKey": "0011101010",
+            "Id": "2432327d-f8ce-44a5-bd4b-b9fdf78e574f",
+            "UserKey": 234,
             "Coin": "Bitcoin",
             "Amount": 100.0
         }

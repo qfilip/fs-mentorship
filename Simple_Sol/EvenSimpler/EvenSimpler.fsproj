@@ -12,6 +12,7 @@
     <Compile Include="Models.fs" />
     <Compile Include="Dal.fs" />
     <Compile Include="Mapper.fs" />
+    <Compile Include="BusinessLogic.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

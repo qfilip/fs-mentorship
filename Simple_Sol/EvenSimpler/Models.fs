@@ -7,6 +7,32 @@ open WrappedTypes.Sha0
 module Common =
     type Coin = Bitcoin | Ethereum | Litecoin
     
+
+open Common
+module Tables = 
+    type UserTbl = {
+        Key: int
+        Nick: string
+    }
+
+    type WalletTbl = {
+        Id: Guid
+        UserKey: int
+        Coin: Coin
+        Amount: float
+    }
+
+    type TransactionTbl = {
+        Id: Guid
+        Sender: int
+        Reciever: int
+        Signature: int
+        Amount: float
+        Coin: Coin
+    }
+
+
+module Entities =
     type Wallet = {
         Id: Guid
         UserKey: Sha0
@@ -14,61 +40,44 @@ module Common =
         Amount: float
     }
 
-open Common
-module Tables = 
-    type UserTbl = {
-        Key: string
-        Nick: string
-    }
-
-    type WalletTbl = {
-        Id: Guid
-        UserKey: string
-        Coin: Coin
-        Amount: float
-    }
-
-    type TransactionTbl = {
-        Id: Guid
-        Sender: string
-        Reciever: string
-        VerificationHash: string
-        Coin: Coin
-        Amount: float
-    }
-
-
-module Entities =
     type User = {
         Key: Sha0
         Nick: string
-        Wallet: Wallet
+        Wallet: Wallet option
     }
 
     type Transaction = {
         Id: Guid
-        Sender: User
-        Reciever: User
-        VerificationHash: Sha0
-        Exchange: Wallet
+        SenderKey: Sha0
+        RecieverKey: Sha0
+        Signature: Sha0
+        Amount: float
+        Coin: Coin
     }
 
 
 module Dtos =
-    open Entities
+    
+    type WalletDto = {
+        Id: Guid
+        UserKey: int
+        Coin: Coin
+        Amount: float
+    }
 
     type UserDto = {
         Key: int
         Nick: string
-        Wallet: Wallet
+        Wallet: WalletDto option
     }
 
     type TransactionDto = {
         Id: Guid
-        Sender: User
-        Reciever: User
-        Signature: int
-        Exchange: Wallet
+        SenderKey: int
+        RecieverKey: int
+        Signature: int option
+        Amount: float
+        Coin: Coin
     }
 
 
@@ -77,6 +86,7 @@ module DomainErrors =
     type InsufficientFunds = string
     type InvalidCoinType = string
     type InvalidKey = string
+    
     type TransactionError =
         | InvalidKey
         | InvalidSignature
@@ -89,4 +99,4 @@ module FunctionTypes =
     open Entities
     open DomainErrors
 
-    type ValidateCrewMember = TransactionDto -> Result<Transaction, TransactionError>
+    type ValidateTransaction = TransactionDto -> Result<Transaction, TransactionError>
