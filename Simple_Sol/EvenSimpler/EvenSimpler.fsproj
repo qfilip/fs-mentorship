@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="ValidationCommon.fs" />
+    <Compile Include="Expressions.fs" />
     <Compile Include="WrappedTypes.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="Dal.fs" />

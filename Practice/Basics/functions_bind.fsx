@@ -69,7 +69,6 @@ let createUserPretty id age email =
         let! isId = createId id
         let! isAge = createAge age
         let! isEmail = createEmail email
+        
         return (createUser isId isAge isEmail)
     }
-
-
