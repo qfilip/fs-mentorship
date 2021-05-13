@@ -22,7 +22,7 @@ module User =
     let private createUser key nick wallet =
         let entity: User = { Key = key; Nick = nick; Wallet = wallet }        
         entity
-   
+    
 
     let mapKey dtoKey =
         match dtoKey |> Sha0.wrap with

@@ -59,26 +59,25 @@ let validateTransactionRequest (dto: TransactionDto) =
 
     let keys = [dto.SenderKey; dto.RecieverKey]
     let amountValidator x = if x > 0. then Success x else Failure ["Amount must be bigger than 0"]
-    let usersValidator us = us |> List.length = 2
     
+    let senderAmountValidator x maxAmount =
+            if x.Amount > 0. && x.Amount <= maxAmount
+            then Success x
+            else Failure ["Insuficcient funds"]
+    
+    let usersValidator us = us |> List.length = 2
 
     let validator = ValidatorExpression()
 
     validator {
-        let! amount = 
-            if dto.Amount > 0.
-            then Success dto.Amount
-            else Failure ["Amount must be bigger than 0"]
-        
+        let! amount = amountValidator dto.Amount
         let! users = getUsersByKeys keys
         let! senderWallet = getWalletByUserKey dto.SenderKey
+        // check if this will fail 
         
-        let! hasMoney =
-            if senderWallet.Amount > 0. && senderWallet.Amount <= amount
-            then Success true
-            else Failure ["Insuficcient funds"]
+        let! hasMoney = senderAmountValidator senderWallet.Amount amount
 
-
+        
 
         return 0
     }

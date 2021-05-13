@@ -80,17 +80,17 @@ module Dtos =
         Coin: Coin
     }
 
-
 module DomainErrors =
+    // refactor to single case DU
+    type InvalidKey = string
+    type InvalidCoinType = string
     type InvalidSignature = string
     type InsufficientFunds = string
-    type InvalidCoinType = string
-    type InvalidKey = string
     
     type TransactionError =
         | InvalidKey
-        | InvalidSignature
         | InvalidCoinType
+        | InvalidSignature
         | InsufficientFunds
 
 
