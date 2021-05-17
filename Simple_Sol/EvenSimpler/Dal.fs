@@ -3,7 +3,6 @@
 open System
 open System.IO
 open Thoth.Json.Net
-open ValidationCommon
 open Models.Common
 open Models.Tables
 
@@ -22,8 +21,8 @@ module Common =
 
     let execute f =
         match loadDb with
-        | Ok db -> Success (db |> f)
-        | Error e -> Failure [e]
+        | Ok db -> Ok (db |> f)
+        | Error e -> Error [e]
 
 
 open Common

@@ -1,28 +1,29 @@
-﻿module ValidationCommon
+﻿[<RequireQualifiedAccess>]
+module Result
 
-type Result<'a> =
-    | Success of 'a
-    | Failure of string list
+let fromOption = function
+    | Some x -> Ok x
+    | None -> Error ["Data not found"]
 
 
 let map f xResult =
     match xResult with
-    | Success x -> Success (f x)
-    | Failure errs -> Failure errs
+    | Ok x -> Ok (f x)
+    | Error errs -> Error errs
 
 
 let apply aResult bResult =
     match aResult, bResult with
-    | Success a, Success b -> Success (a b)
-    | Failure aErrs, Success _ -> Failure aErrs
-    | Success _, Failure bErrs -> Failure bErrs
-    | Failure aErrs, Failure bErrs -> Failure (List.concat [aErrs; bErrs])
+    | Ok a, Ok b -> Ok (a b)
+    | Error aErrs, Ok _ -> Error aErrs
+    | Ok _, Error bErrs -> Error bErrs
+    | Error aErrs, Error bErrs -> Error (List.concat [aErrs; bErrs])
 
 
 let bind f aResult =
     match aResult with
-    | Success a -> f a
-    | Failure aErrs -> Failure aErrs
+    | Ok a -> f a
+    | Error aErrs -> Error aErrs
 
 
 let (<!>) = bind
@@ -31,6 +32,6 @@ let (<*>) = apply
 
 let zip a b =
     let toTuple a b = (a, b)
-    Success toTuple <*> a <*> b
-    // Success (toTuple (apply a apply b))
+    Ok toTuple <*> a <*> b
+    // Ok (toTuple (apply a apply b))
     // why order of ops must be specified here ???

@@ -1,7 +1,6 @@
 ﻿module WrappedTypes
 
 open System
-open ValidationCommon
 
 let private defMsg = "Failed to create"
 
@@ -16,7 +15,7 @@ let private getNullError typeName =
     [error]
 
 
-let wrapAny x = Success x
+let wrapAny x = Ok x
 
 
 module Sha0 =
@@ -27,10 +26,10 @@ module Sha0 =
     let private validator x =
         let maxValue = int (Math.Pow(2., float (Utils.HashLength)))
         match (x >= 0 && x <= maxValue) with
-        | true -> Success (Sha0 (Utils.makeKey x))
+        | true -> Ok (Sha0 (Utils.makeKey x))
         | _ ->
             let reason = sprintf "Must be within range: 0-%i" maxValue
-            Failure (getValueError typeName reason)
+            Error (getValueError typeName reason)
         
 
     let wrap x = validator x

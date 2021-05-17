@@ -50,9 +50,13 @@ module Entities =
         Id: Guid
         SenderKey: Sha0
         RecieverKey: Sha0
-        Signature: Sha0
         Amount: float
         Coin: Coin
+    }
+
+    type SignedTransaction = {
+        Signature: Sha0
+        Transaction: Transaction
     }
 
 
