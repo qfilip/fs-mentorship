@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.6" />
     <PackageReference Include="Thoth.Json.Net" Version="5.0.0" />
   </ItemGroup>
 

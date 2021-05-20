@@ -3,7 +3,6 @@
 open WrappedTypes
 open Models.Entities
 open Models.Dtos
-open ValidationCommon
 
 
 module Wallet =
@@ -13,9 +12,9 @@ module Wallet =
 
     let mapEntity (dto: WalletDto) =
         match dto.UserKey |> Sha0.wrap with
-        | Failure fs -> Failure fs
-        | Success userKey ->
-            Success (createWallet dto.Id userKey dto.Coin dto.Amount)
+        | Error fs -> Error fs
+        | Ok userKey ->
+            Ok (createWallet dto.Id userKey dto.Coin dto.Amount)
 
 
 module User =
@@ -26,17 +25,17 @@ module User =
 
     let mapKey dtoKey =
         match dtoKey |> Sha0.wrap with
-        | Failure fs -> Failure fs
-        | Success key -> Success key
+        | Error fs -> Error fs
+        | Ok key -> Ok key
 
 
     let mapEntity (dto: UserDto) =
         match dto.Key |> Sha0.wrap with
-        | Failure fs -> Failure fs
-        | Success key ->
+        | Error fs -> Error fs
+        | Ok key ->
             match dto.Wallet with
-            | None -> Success (createUser key dto.Nick None)
+            | None -> Ok (createUser key dto.Nick None)
             | Some wDto ->
                 match  Wallet.mapEntity wDto with
-                | Failure fs -> Failure fs
-                | Success wallet -> Success (createUser key dto.Nick (Some wallet))
+                | Error fs -> Error fs
+                | Ok wallet -> Ok (createUser key dto.Nick (Some wallet))

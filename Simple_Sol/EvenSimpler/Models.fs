@@ -10,20 +10,24 @@ module Common =
 
 open Common
 module Tables = 
+
+    [<CLIMutable>]
     type UserTbl = {
         Key: int
         Nick: string
     }
 
+    [<CLIMutable>]
     type WalletTbl = {
-        Id: Guid
+        Id: string
         UserKey: int
         Coin: Coin
         Amount: float
     }
 
+    [<CLIMutable>]
     type TransactionTbl = {
-        Id: Guid
+        Id: string
         Sender: int
         Reciever: int
         Signature: int

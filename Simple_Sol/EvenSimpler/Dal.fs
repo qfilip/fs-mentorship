@@ -29,7 +29,7 @@ open Common
 module MockDb =
     let mockit =
         let mkUser (keyNum, nick) = { Key = keyNum; Nick = nick }
-        let mkId () = Guid.NewGuid()
+        let mkId () = Guid.NewGuid().ToString()
         let mkWallet user coin amount: WalletTbl =
             { Id = mkId (); UserKey = user.Key; Coin = coin; Amount = amount }
         
@@ -49,4 +49,27 @@ module MockDb =
 
         let json = Encode.Auto.toString(4, db)
         saveDb json |> ignore
+
+open Dapper
+open Microsoft.Data.Sqlite
+module SqlDb =
+    //https://www.codesuji.com/2017/07/29/F-and-Dapper/
+    let private dataSource = Path.Combine(__SOURCE_DIRECTORY__, "coins.db3")
+    let private connectionString = sprintf "Data Source=%s;Version=3;" dataSource
+
+    let command (operation: unit) =
+        let connection = new SqliteConnection(connectionString)
+        connection.Open()
+        
+        //let insertTradeSql = 
+        //    "insert into user(key, nick) " + 
+        //    "values (@key, @nick)"
+        
+        //let sqlCmd (items: UserTbl list) (commandString: string)=
+        //    items
+        //    |> List.map (fun x -> connection.Execute(commandString, x))
+        //    |> List.sum
+        //    |> (fun recordsAdded -> printfn "Records added  : %d" recordsAdded)
+        
+        connection.Close()
 

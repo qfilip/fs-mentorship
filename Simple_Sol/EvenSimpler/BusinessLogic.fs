@@ -18,8 +18,21 @@ let resultBind f result error =
     | Ok r -> f r
     | Error _ -> failwith error
 
-
+open Dal
 module User =
+
+    let insertSampleUsers =
+        let sqlCmd =
+            let insertTradeSql = 
+                "insert into user(key, nick) " + 
+                "values (@key, @nick)"
+            items
+            |> List.map (fun x -> connection.Execute(commandString, x))
+            |> List.sum
+            |> (fun recordsAdded -> printfn "Records added  : %d" recordsAdded)
+
+        SqlDb.command 
+
     let checkUserExists (userKey: int) =
         let command (db: SampleDatabase) = 
             db.Users |> List.tryFind (fun x -> x.Key = userKey)
@@ -61,7 +74,8 @@ module Wallet =
         let dbResult = execute command
         let parseResult (x: WalletTbl): Wallet =
             let key = x.UserKey |> Utils.makeKey |> Sha0.wrapUnchecked
-            { Id = x.Id; UserKey = key; Coin = x.Coin; Amount = x.Amount }
+            let id = System.Guid.Parse(x.Id)
+            { Id = id; UserKey = key; Coin = x.Coin; Amount = x.Amount }
 
         (dbResultBind parseResult dbResult)
 
@@ -79,20 +93,21 @@ module Transaction =
 
         let validator = ValidatorExpression()
 
-        validator {
-            let! sender = User.getByKey dto.SenderKey
-            let! reciever = User.getByKey dto.RecieverKey
-            let! users = User.getByKeys keys
-            let! senderWallet = Wallet.getByUserKey dto.SenderKey
-            let! amount = amountValidator dto.Amount senderWallet.Amount
+        //validator {
+        //    let! sender = User.getByKey dto.SenderKey
+        //    let! reciever = User.getByKey dto.RecieverKey
+        //    let! users = User.getByKeys keys
+        //    let! senderWallet = Wallet.getByUserKey dto.SenderKey
+        //    let! amount = amountValidator dto.Amount senderWallet.Amount
 
-            let transaction = {
-                Id = dto.Id
-                SenderKey = sender.Key
-                RecieverKey = reciever.Key
-                Amount = amount
-                Coin = dto.Coin
-            }
+        //    let transaction = {
+        //        Id = dto.Id
+        //        SenderKey = sender.Key
+        //        RecieverKey = reciever.Key
+        //        Amount = amount
+        //        Coin = dto.Coin
+        //    }
 
-            return transaction
-        }
+        //    return transaction
+        //}
+        0
