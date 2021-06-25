@@ -1,6 +1,6 @@
-type ValidationResult<'a> =
+type ValidationResult<'a, 'aError> =
     | Success of 'a
-    | Fail of string list
+    | Fail of 'aError
 
 
 let map f xResult =

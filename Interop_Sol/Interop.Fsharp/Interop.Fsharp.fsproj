@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="InteropChecks.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
